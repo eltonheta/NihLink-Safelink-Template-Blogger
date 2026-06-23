@@ -1,69 +1,235 @@
-# NihLink Safelink Template Blogger
+# 🔐 NihLink Safelink - v3.0 Modernized Edition
 
-![GitHub release](https://img.shields.io/github/release/anasrar/NihLink-Safelink-Template-Blogger.svg) ![GitHub](https://img.shields.io/github/license/anasrar/NihLink-Safelink-Template-Blogger.svg)
+> **Modern, Fast & Secure URL Encryption for Blogger** - Completely Rewritten with Bootstrap 5, ES6+, and Dark Mode
 
-🔐 Simple Safelink Template Blogger
+[![GitHub](https://img.shields.io/badge/GitHub-eltonheta-blue?logo=github)](https://github.com/eltonheta/NihLink-Safelink-Template-Blogger)
+[![Version](https://img.shields.io/badge/version-3.0.0-success)](CHANGELOG-v3.md)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple)](https://getbootstrap.com)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-yellow)](https://www.javascript.com)
 
-[ [DEMO](https://nihlink.blogspot.com) ] [ [RULES](RULES.md) ] [ [CHANGELOG](CHANGELOG.md) ]
+![Screenshot](screenshot.png)
 
-![DEMO](screenshot.png)
+## 🎯 Për Çfarë Shërbën?
 
-# THIS PROJECT IS DISCONTINUED
+**NihLink v3.0** është një sistem i plotë për enkriptimin dhe mbrojtjen e lidhjeve në Blogger. Ju lejon të:
 
-Because Someone Don't Respect The [RULES](RULES.md)
+- 🔒 Enkriptoni URL-et me AES-256
+- 🔑 Shtoni fjalëkalim mbrojtjeje
+- ⏱️ Shtonje timer countdown
+- 🌙 Ndërrojini temat (Dark Mode)
+- 📱 Punoni në të gjithë pajisjet
+- ⚡ Ngarkimi i shpejtë (pa jQuery)
 
-# Feature
+## ✨ Çfarë Ka të Re në v3.0
 
-- Encrypt URL
-- Unlock With Password
-- Sticky Ads
-- Timer Countdown
+| Karakteristika | v2.6.5 | v3.0 |
+|---|---|---|
+| Bootstrap | 4.3.1 | 5.3 ✅ |
+| jQuery | Po ❌ | Jo ✅ |
+| Dark Mode | - | Po ✅ |
+| Font Awesome | Po | Bootstrap Icons ✅ |
+| ES6+ Classes | - | Po ✅ |
+| Performance | ~85KB | ~45KB ✅ |
+| Browser Support | IE 11 | Modern Only ✅ |
 
-# How To Make Safelink Page / Article
+## 🚀 Quick Start
 
-On **HTML** Mode
+### 1. Fork ose Download
 
-Just insert ```<div id='output'></div>```
-
-Or You Can Set The ID On Setting Section
-
-## 📌 Example
-
-```html
-<p>Eum ab autem quia impedit facere. Molestias nemo facere quo. Tenetur ea occaecati. Iusto minus repudiandae qui et dolore. At aut enim dicta aut mollitia beatae. Ipsam qui quia qui ut vel error animi.</p>
-<div id='output'></div>
-<p>Eius cumque magnam nisi nulla itaque consequatur doloremque sit. Enim voluptas tempore harum aliquid explicabo ut adipisci corrupti. Dolorem aut optio ab porro dolores. Ipsa repellendus commodi. Dolorem voluptatem quasi dolorem voluptas dignissimos aut. Aut cumque voluptate atque excepturi unde est ea quis dolores.</p>
+```bash
+git clone https://github.com/eltonheta/NihLink-Safelink-Template-Blogger.git
+cd NihLink-Safelink-Template-Blogger
+git checkout modernize-v3
 ```
 
-# ⚙ Setting
+### 2. Shkoni në Blogger Dashboard
 
-Layout > page-setting > setting
+1. Settings → Languages and Formatting
+2. Design → Edit HTML
+3. **Backup your current template** ⚠️
+4. Copy content from `template-v3.xml`
+5. Paste and Save
 
-## 📌 Value
+### 3. Konfiguroni Settingsat
 
-```js
-url: "", //blog url, if it is empty it will automatically use the blog url (don't add a slash at the end of the url)
-page: "p/page.html", // url safelink page / safelink article
-output: "#output", // place the output link, use the id attribute
-fixednavbar: true, // please change to true / false if you want the Navbar to float
-countdown: true, // please change to true / false if you want safelink page with countdown
-timedown: 10, // countdown start
-lang: {
-  urlempty: "URL can not be empty",
-  convertsuccess: "Convert URL success, copy url on box below",
-  validtext: "HTTP, HTTPS, or WWW",
-  gourltext: "Click here to go",
-  nourl: "No URl here",
-  errorconvert: "URL can not to convert",
-  emptypass: "Password can not be empty",
-  wrongpass: "Password is incorrect",
-  countdowntext: "Please Wait {{anascountdown}} Second";
+Edit në **Appearance → Settings Widget**:
+
+```javascript
+{
+  url: "https://yourblog.blogspot.com",
+  page: "p/safelink.html",
+  defaultkey: "YourSecretKey123",
+  countdown: true,
+  timedown: 10,
+  lang: {
+    urlempty: "URL mund të mos jetë e zbrazët",
+    convertsuccess: "Konvertimi i URL-it ishte i suksesshëm!",
+    // ... më shumë opcione
+  }
 }
 ```
 
-# 🙌 Built With
+## 📖 Dokumentim
 
-- [Bootstrap](https://getbootstrap.com/) 4.3.1
-- [jQuery](https://jquery.com/) 2.1.4
-- [Font Awesome](https://fontawesome.com/) 5.0.10
-- [crypto-js](https://github.com/brix/crypto-js) 3.1.2
+- 📚 [README-v3.md](README-v3.md) - Dokumentim i kompletë
+- 🔄 [CHANGELOG-v3.md](CHANGELOG-v3.md) - Historia e ndryshimeve
+- 🛠️ [API Reference](README-v3.md#-api-reference) - Për developers
+
+## 🎨 Features
+
+### 🔐 Enkriptim i Sigurt
+```javascript
+// Automatic AES-256 encryption
+const link = generator.generateSafelink('https://example.com', 'password', true);
+```
+
+### 🌙 Dark Mode
+- Toggle manual në navbar
+- Auto-save në localStorage
+- Smooth transitions
+- Responsive design
+
+### ⚡ Vanilla JavaScript (Zero Dependencies)
+```javascript
+// Modern ES6+ Classes
+class SafelinkGenerator { ... }
+class SafelinkDecryptor { ... }
+class ThemeManager { ... }
+class SafelinkAutoGenerator { ... }
+```
+
+### 📱 Fully Responsive
+- Mobile-first design
+- Tablet optimized
+- Desktop enhanced
+- Touch-friendly
+
+### 🎯 Auto-Generate Safelinks
+```javascript
+const generator = new SafelinkAutoGenerator(
+  ['example.com', 'mysite.com'],
+  {
+    url: 'https://myblog.blogspot.com',
+    keyit: 'YourSecret',
+    countdown: true
+  }
+);
+
+generator.process().then(count => {
+  console.log(`${count} links encrypted`);
+});
+```
+
+## 🛠️ Teknologjia
+
+- **Bootstrap 5.3** - UI Framework
+- **CryptoJS 4.1** - AES Encryption
+- **Bootstrap Icons** - Icon Library
+- **Vanilla JavaScript** - Modern ES6+
+- **No jQuery** - Better Performance
+
+## 📊 Krahasimi me Versionin Origjinal
+
+### Madhësia e Fajllave
+```
+Original (v2.6.5):
+- Bootstrap 4.3.1: ~54KB
+- jQuery 2.1.4: ~84KB
+- Font Awesome 5.0.10: ~65KB
+- Total: ~200KB+
+
+v3.0 Modernized:
+- Bootstrap 5.3: ~30KB
+- CryptoJS 4.1: ~15KB
+- Bootstrap Icons: ~8KB
+- Total: ~53KB ✅ 73% më i vogël!
+```
+
+### Performance
+- ⚡ Më i shpejtë në ngarkimin e faqes
+- 📉 Më pak requests (CDN kombinuar)
+- 💪 Më i fuqishëm në faqet mobile
+- 🎯 Better SEO score
+
+## 🔒 Sigurësia
+
+- ✅ **AES-256 Encryption** - Standardi ushtarak
+- ✅ **Client-side Only** - Asnjë server involvement
+- ✅ **No Data Storage** - Linqet nuk ruhen kurrësesi
+- ✅ **HTTPS Required** - Për sigurinë maksimale
+- ✅ **Open Source** - Kontrolluar nga komunitet
+
+## 🐛 Troubleshooting
+
+### Linqet nuk shfaqen
+```javascript
+// Sigurohuni se keni <div id='output'></div> në post
+<p>Your content...</p>
+<div id='output'></div>
+```
+
+### "CryptoJS not loaded"
+```javascript
+// Kontrolloni network tab në DevTools
+// Sigurohuni se CDN-et janë accessible
+```
+
+### Password-i nuk punon
+```javascript
+// Përdorni të njëtin key gjatë enkriptimit dhe dekriptimit
+defaultkey: "SameKeyUsedForEncryption"
+```
+
+## 🤝 Kontribucioni
+
+Kërkojnë kontribute! Ju lutemi:
+
+1. Fork the repo
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 Licenca
+
+MIT License - Të lirë për përdorim personal dhe komercial
+
+```
+Copyright (c) 2024 Elton Heta
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files...
+```
+
+## 🙏 Falenderime
+
+- **Original Developer** - [Anas RAR](https://github.com/anasrar) për ideën origjinale
+- **CryptoJS** - [Jeff Mott](https://cryptojs.org)
+- **Bootstrap Team** - Për UI framework
+- **Community** - Për suportin
+
+## 📞 Kontakt & Support
+
+- 🐛 [Report Bug](https://github.com/eltonheta/NihLink-Safelink-Template-Blogger/issues)
+- 💡 [Suggest Feature](https://github.com/eltonheta/NihLink-Safelink-Template-Blogger/discussions)
+
+## 🔗 Links
+
+- 🌐 [Live Demo](https://nihlink.blogspot.com)
+- 📖 [Original Repository](https://github.com/anasrar/NihLink-Safelink-Template-Blogger)
+- 🎨 [My Portfolio](https://github.com/eltonheta)
+
+---
+
+## 📈 Project Stats
+
+- ⭐ Stars: [![GitHub stars](https://img.shields.io/github/stars/eltonheta/NihLink-Safelink-Template-Blogger?style=social)](https://github.com/eltonheta/NihLink-Safelink-Template-Blogger)
+- 🍴 Forks: [![GitHub forks](https://img.shields.io/github/forks/eltonheta/NihLink-Safelink-Template-Blogger?style=social)](https://github.com/eltonheta/NihLink-Safelink-Template-Blogger)
+- 👁️ Watchers: [![GitHub watchers](https://img.shields.io/github/watchers/eltonheta/NihLink-Safelink-Template-Blogger?style=social)](https://github.com/eltonheta/NihLink-Safelink-Template-Blogger)
+
+---
+
+**Made with ❤️ for the Blogger & Web Developer Community**
+
+*Last Updated: June 2024 | Version 3.0.0*
