@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/goog-sb'>
+<head>
+  <meta charset='utf-8'/>
+  <meta content='width=device-width, initial-scale=1, user-scalable=yes, maximum-scale=1' name='viewport'/>
+  
+  <b:if cond='data:blog.pageType == &quot;error_page&quot;'>
+    <title>Page Not Found - <data:blog.title/></title>
+  <b:else/>
+    <title><data:view.title.escaped/></title>
+  </b:if>
+  
+  <b:include data='blog' name='all-head-content'/>
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet'/>
+  <!-- Bootstrap Icons -->
+  <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css' rel='stylesheet'/>
+  <!-- CryptoJS for encryption -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js'></script>
+  <!-- QR Code Generator -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'></script>
+
+  <style type='text/css'>
+    :root {
+      --primary-color: #0d6efd;
+      --secondary-color: #6c757d;
+      --success-color: #198754;
+      --danger-color: #dc3545;
+      --warning-color: #ffc107;
+      --info-color: #0dcaf0;
+      --light-bg: #f8f9fa;
+      --dark-bg: #212529;
+    }
+
+    * {
+      outline: none !important;
+    }
+
+    html, body {
+      height: 100%;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      color: #212529;
+    }
+
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: #f8f9fa;
+    }
+
+    a {
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      text-decoration: none !important;
+    }
+
+    .overflow-hidden {
+      overflow: hidden;
+    }
+
+    .trans {
+      transition: all 0.5s ease-in-out;
+    }
+
+    .hidding-smooth {
+      position: relative;
+      height: 6vh;
+      overflow: hidden;
+    }
+
+    .hidding-smooth:after {
+      transition: ease 0.8s;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      content: '';
+      background: linear-gradient(180deg, transparent, var(--light-bg) 70%);
+      width: 100%;
+      height: 5vh;
+    }
+
+    body.dark-mode .hidding-smooth:after {
+      background: linear-gradient(180deg, transparent, var(--dark-bg) 70%);
+    }
+
+    .hidding-smooth:hover:after {
+      height: 1px;
+    }
+
+    #fullpage {
+      min-height: 100%;
+      margin: 0 0 -120px 0;
+      padding: 0 0 120px 0;
+    }
+
+    .navbar {
+      background-color: #fff !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    body.dark-mode .navbar {
+      background-color: #2d3748 !important;
+      border-color: #4a5568 !important;
+    }
+
+    .sticky-top {
+      top: calc(60px + 1rem);
+    }
+
+    footer.footer {
+      height: 120px;
+      background-color: #fff;
+      border-top: 1px solid #dee2e6;
+      transition: all 0.3s;
+    }
+
+    body.dark-mode footer.footer {
+      background-color: #2d3748;
+      border-top-color: #4a5568;
+    }
+
+    .form-control, .input-group-text {
+      transition: all 0.3s;
+    }
+
+    body.dark-mode .form-control {
+      background-color: #2d3748;
+      border-color: #4a5568;
+      color: #f8f9fa;
+    }
+
+    body.dark-mode .form-control:focus {
+      background-color: #2d3748;
+      border-color: var(--primary-color);
+      color: #f8f9fa;
+    }
+
+    body.dark-mode .input-group-text {
+      background-color: #2d3748;
+      border-color: #4a5568;
+      color: #f8f9fa;
+    }
+
+    .btn-transition {
+      transition: all 0.3s ease;
+    }
+
+    .btn-transition:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    body.dark-mode .card {
+      background-color: #2d3748;
+      color: #f8f9fa;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .alert {
+      border: none;
+      border-radius: 8px;
+    }
+
+    .spinner-border {
+      animation: spinner-border 0.75s linear infinite;
+    }
+
+    @media (max-width: 767px) {
+      .order-custom {
+        order: 1;
+      }
+      
+      .navbar-toggler {
+        border: none;
+      }
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: transform 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(20deg);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+  </style>
+
+  <b:skin version='1.0.0'><![CDATA[
+    body#layout {width:100%}
+    body#layout ul {display: none;}
+    body#layout .layouthide {display:none}
+  ]]></b:skin>
+
+  <b:template-skin><![CDATA[
+    body#layout:before{
+      content:"NihLink v3.0.0";
+      position:absolute;
+      top:33px;
+      right:7px;
+      z-index:1;
+      padding:10px 20px;
+      font-size:18px;
+      font-family:sans-serif;
+      color:#fff;
+      background: #0d6efd;
+      border-radius: 8px;
+    }
+    body#layout {background-color: #fff; border: 0}
+    body#layout div.section {background-color: #fff}
+    body#layout .add_widget a {color: #0d6efd}
+    body#layout .row:after {content:'';clear:both;display:block}
+    body#layout .isHideLayout {display:none;}
+    body#layout .col-md-3 {float:left;width:30%;}
+    body#layout .col-md-6 {float:left;width:40%;}
+    body#layout #page-setting {background: #fffcf2; border-radius: 8px;}
+  ]]></b:template-skin>
+</head>
+
+<body itemscope='itemscope' itemtype='http://schema.org/WebPage'>
+  <div id='fullpage'>
+    <div class='container-fluid'>
+      <!-- Navigation Bar -->
+      <nav class='navbar navbar-expand-lg navbar-light sticky-top'>
+        <div class='container'>
+          <a class='navbar-brand fw-bold' expr:href='data:blog.homepageUrl'>
+            <i class='bi bi-shield-lock'></i> <data:blog.title/>
+          </a>
+          
+          <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
+            <span class='navbar-toggler-icon'></span>
+          </button>
+
+          <div class='collapse navbar-collapse' id='navbarNav'>
+            <ul class='navbar-nav ms-auto'>
+              <li class='nav-item'>
+                <button class='btn btn-link nav-link theme-toggle' id='themeToggle' title='Toggle Dark Mode'>
+                  <i class='bi bi-moon'></i>
+                </button>
+              </li>
+              <li class='nav-item dropdown'>
+                <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown'>Menu</a>
+                <ul class='dropdown-menu dropdown-menu-end'>
+                  <li><a class='dropdown-item' href='https://github.com/anasrar/NihLink-Safelink-Template-Blogger' target='_blank'><i class='bi bi-github'></i> Documentation</a></li>
+                  <li><a class='dropdown-item' href='https://anasrar.github.io/blog/' target='_blank'><i class='bi bi-person'></i> My Blog</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div class='container py-4'>
+        <div id='isihalaman'>
+          <!-- Settings Widget (Admin Only) -->
+          <b:section class='page-setting' cond='!data:view.isPreview' id='page-setting' maxwidgets='1'>
+            <b:widget id='HTML696' locked='false' title='Settings' type='HTML' version='2' visible='true'>
+              <b:widget-settings>
+                <b:widget-setting name='content'>url: "",
+page: "p/safelink.html",
+output: "#output",
+defaultkey: "NihLink2024",
+fixednavbar: true,
+countdown: true,
+timedown: 10,
+analytics: true,
+lang: {
+  urlempty: "URL mund të mos jetë e zbrazët",
+  convertsuccess: "Konvertimi i URL-it ishte i suksesshëm, kopjoni URL-in më poshtë",
+  validtext: "HTTP, HTTPS, ose WWW",
+  gourltext: "Kliko këtu për të shkuar",
+  nourl: "Nuk ka URL këtu",
+  errorconvert: "URL nuk mund të konvertohet",
+  emptypass: "Fjalekalimi nuk mund të jetë i zbrazët",
+  wrongpass: "Fjalekalimi është i pasaktë",
+  countdowntext: "Ju lutemi prisni {{anascountdown}} sekonda"
+}</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+                <script type='text/javascript'>
+                  "use strict";
+                  document.addEventListener('DOMContentLoaded', function() {
+                    window.new_config = {
+                      <data:content/>
+                    }
+                    window.config = Object.assign({}, window.asli_config, window.new_config);
+                  });
+                </script>
+              </b:includable>
+            </b:widget>
+          </b:section>
+
+          <div class='row'>
+            <!-- Left Sidebar Ads -->
+            <div class='col-12 col-lg-3 mb-4'>
+              <b:section class='ads-left sticky-top' cond='!data:view.isPreview' id='ads-left' maxwidgets='1'>
+                <b:widget id='HTML602' locked='false' title='left-sidebar-ads' type='HTML' version='2' visible='true'>
+                  <b:widget-settings>
+                    <b:widget-setting name='content'><![CDATA[<img src="https://via.placeholder.com/300x300?text=Advertisement" alt="ad" class="img-fluid rounded mb-3" />]]></b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <b:if cond='data:view.isSingleItem'>
+                      <data:content/>
+                    </b:if>
+                  </b:includable>
+                </b:widget>
+              </b:section>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class='col-12 col-lg-6 pb-4'>
+              <b:if cond='data:blog.pageType == &quot;error_page&quot;'>
+                <div class='text-center py-5'>
+                  <i class='bi bi-exclamation-circle' style='font-size: 5rem; color: var(--danger-color);'></i>
+                  <h1 class='display-4 mt-3'>Oops!</h1>
+                  <p class='lead'>Faqja nuk u gjet</p>
+                </div>
+              </b:if>
+
+              <b:if cond='data:view.isSingleItem'>
+                <div id='output'></div>
+              </b:if>
+
+              <b:if cond='data:view.isMultipleItems'>
+                <div class='card mb-4'>
+                  <div class='card-body'>
+                    <h5 class='card-title mb-3'><i class='bi bi-shield-lock'></i> Krijo Safelink</h5>
+                    
+                    <form id='safelink' class='needs-validation' novalidate>
+                      <div class='mb-3'>
+                        <label for='urlinput' class='form-label'>URL:</label>
+                        <div class='input-group'>
+                          <span class='input-group-text'><i class='bi bi-link-45deg'></i></span>
+                          <input type='text' class='form-control' id='urlinput' placeholder='https://example.com' required/>
+                        </div>
+                      </div>
+
+                      <div class='row mb-3'>
+                        <div class='col-md-6'>
+                          <label for='passinput' class='form-label'>Fjalekalimi (Opsional):</label>
+                          <div class='input-group'>
+                            <span class='input-group-text'><i class='bi bi-lock'></i></span>
+                            <input type='password' class='form-control' id='passinput' placeholder='Lej të zbrazët për pastandard'/>
+                          </div>
+                        </div>
+                        <div class='col-md-6'>
+                          <label class='form-label'>Opsionet:</label>
+                          <div>
+                            <div class='form-check form-check-inline'>
+                              <input class='form-check-input' type='checkbox' id='countDown'/>
+                              <label class='form-check-label' for='countDown'>Countdown</label>
+                            </div>
+                            <div class='form-check form-check-inline'>
+                              <input class='form-check-input' type='checkbox' id='randPost'/>
+                              <label class='form-check-label' for='randPost'>Random Post</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <button type='submit' class='btn btn-primary btn-transition w-100'>
+                        <i class='bi bi-arrow-repeat'></i> Konverto
+                      </button>
+                    </form>
+
+                    <div id='result' class='mt-3' style='display:none;'></div>
+                  </div>
+                </div>
+
+                <!-- Features Section -->
+                <section class='layouthide'>
+                  <div class='row text-center mt-5'>
+                    <div class='col-md-4 mb-4'>
+                      <div class='feature-icon'>
+                        <i class='bi bi-shield-check'></i>
+                      </div>
+                      <h5>Enkriptim</h5>
+                      <p class='text-muted'>Përjeton URL-in tuaj pa mundësi dekriptimi</p>
+                    </div>
+                    <div class='col-md-4 mb-4'>
+                      <div class='feature-icon'>
+                        <i class='bi bi-key'></i>
+                      </div>
+                      <h5>Fjalekalim</h5>
+                      <p class='text-muted'>Mbrojeni linqet tuaja me një fjalekalim</p>
+                    </div>
+                    <div class='col-md-4 mb-4'>
+                      <div class='feature-icon'>
+                        <i class='bi bi-clock'></i>
+                      </div>
+                      <h5>Countdown</h5>
+                      <p class='text-muted'>Shtoni një zgjatje kohe përpara ridrejtimit</p>
+                    </div>
+                  </div>
+                </section>
+              </b:if>
+            </div>
+
+            <!-- Right Sidebar Ads -->
+            <div class='col-12 col-lg-3 order-last mb-4'>
+              <b:section class='ads-right sticky-top' cond='!data:view.isPreview' id='ads-right' maxwidgets='1'>
+                <b:widget id='HTML704' locked='false' title='right-sidebar-ads' type='HTML' version='2' visible='true'>
+                  <b:widget-settings>
+                    <b:widget-setting name='content'><![CDATA[<img src="https://via.placeholder.com/300x300?text=Advertisement" alt="ad" class="img-fluid rounded mb-3" />]]></b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <b:if cond='data:view.isSingleItem'>
+                      <data:content/>
+                    </b:if>
+                  </b:includable>
+                </b:widget>
+              </b:section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class='footer'>
+    <div class='d-flex align-items-center h-100'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-6'>
+            <p class='mb-0'>© 2024 <a expr:href='data:blog.homepageUrl' expr:title='data:blog.title'><data:blog.title/></a> - All Rights Reserved</p>
+          </div>
+          <div class='col-md-6 text-md-end'>
+            <p class='mb-0'>Created with <i class='bi bi-heart-fill' style='color: var(--danger-color);'></i> by <a href='https://github.com/anasrar' target='_blank'>Anas RAR</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS -->
+  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js'></script>
+
+  <!-- Safelink Core Script -->
+  <script type='text/javascript'>
+    "use strict";
+
+    /**
+     * SafelinkDecryptor - Handles URL decryption and display
+     */
+    class SafelinkDecryptor {
+      constructor(config) {
+        this.config = config;
+      }
+
+      decryptUrl(encryptedUrl, password) {
+        try {
+          const decrypted = CryptoJS.AES.decrypt(
+            decodeURIComponent(encryptedUrl),
+            password
+          ).toString(CryptoJS.enc.Utf8);
+          return JSON.parse(decrypted);
+        } catch (e) {
+          return false;
+        }
+      }
+
+      getUrlParameter(name, url) {
+        if (!url) url = location.href;
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        const regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        const results = regex.exec(url);
+        return results === null ? null : decodeURIComponent(results[1]);
+      }
+
+      renderLink(data) {
+        const baseUrl = data.url.toLowerCase().startsWith('www.') ? '\/\/' : '';
+        return `<a href="${baseUrl}${data.url}" class="btn btn-primary btn-lg w-100" target="_blank">
+          <i class="bi bi-box-arrow-up-right"></i> ${this.config.lang.gourltext}
+        </a>`;
+      }
+
+      renderCountdown(data, container) {
+        let timeLeft = this.config.timedown;
+        const baseUrl = data.url.toLowerCase().startsWith('www.') ? '\/\/' : '';
+        
+        const countdownInterval = setInterval(() => {
+          const text = this.config.lang.countdowntext.replace('{{anascountdown}}', timeLeft);
+          container.innerHTML = `<div class="alert alert-info text-center mb-0">${text}</div>`;
+          timeLeft--;
+
+          if (timeLeft < 0) {
+            clearInterval(countdownInterval);
+            container.innerHTML = this.renderLink(data);
+          }
+        }, 1000);
+      }
+    }
+
+    /**
+     * SafelinkGenerator - Handles URL encryption and generation
+     */
+    class SafelinkGenerator {
+      constructor(config) {
+        this.config = config;
+        this.init();
+      }
+
+      init() {
+        document.addEventListener('DOMContentLoaded', () => {
+          this.setupEventListeners();
+        });
+      }
+
+      setupEventListeners() {
+        const form = document.getElementById('safelink');
+        if (form) {
+          form.addEventListener('submit', (e) => this.handleFormSubmit(e));
+        }
+      }
+
+      validateUrl(url) {
+        const urlPattern = /(https?:\/\/(www\.)\?|www\.)[^\s]+\.[^\s]+/i;
+        return urlPattern.test(url);
+      }
+
+      encryptData(data, password) {
+        return encodeURIComponent(
+          CryptoJS.AES.encrypt(JSON.stringify(data), password).toString()
+        );
+      }
+
+      generateSafelink(url, password, countdown) {
+        const blogUrl = this.config.url || window.location.origin;
+        const keyit = password || this.config.defaultkey;
+        const data = {
+          url: url,
+          countdown: countdown
+        };
+
+        const encrypted = this.encryptData(data, keyit);
+        return `${blogUrl}/${this.config.page}?u=${encrypted}`;
+      }
+
+      handleFormSubmit(e) {
+        e.preventDefault();
+
+        const urlInput = document.getElementById('urlinput');
+        const passwordInput = document.getElementById('passinput');
+        const countdownCheck = document.getElementById('countDown');
+        const resultDiv = document.getElementById('result');
+
+        if (!this.validateUrl(urlInput.value)) {
+          resultDiv.innerHTML = `<div class="alert alert-warning alert-dismissible fade show">
+            <i class="bi bi-exclamation-triangle"></i> ${this.config.lang.validtext}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>`;
+          resultDiv.style.display = 'block';
+          return;
+        }
+
+        const safelink = this.generateSafelink(
+          urlInput.value,
+          passwordInput.value,
+          countdownCheck.checked
+        );
+
+        resultDiv.innerHTML = `
+          <div class="alert alert-success alert-dismissible fade show">
+            <i class="bi bi-check-circle"></i> ${this.config.lang.convertsuccess}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" value="${safelink}" id="safeLinkOutput" readonly/>
+            <button class="btn btn-outline-primary" type="button" onclick="navigator.clipboard.writeText(document.getElementById('safeLinkOutput').value); alert('Kopjuar!')">
+              <i class="bi bi-clipboard"></i> Kopjo
+            </button>
+          </div>
+        `;
+        resultDiv.style.display = 'block';
+      }
+    }
+
+    /**
+     * ThemeManager - Handles dark mode toggle
+     */
+    class ThemeManager {
+      constructor() {
+        this.darkMode = localStorage.getItem('darkMode') === 'true';
+        this.init();
+      }
+
+      init() {
+        this.applyTheme();
+        const toggle = document.getElementById('themeToggle');
+        if (toggle) {
+          toggle.addEventListener('click', () => this.toggleTheme());
+        }
+      }
+
+      toggleTheme() {
+        this.darkMode = !this.darkMode;
+        localStorage.setItem('darkMode', this.darkMode);
+        this.applyTheme();
+      }
+
+      applyTheme() {
+        if (this.darkMode) {
+          document.body.classList.add('dark-mode');
+          const toggle = document.getElementById('themeToggle');
+          if (toggle) toggle.innerHTML = '<i class="bi bi-sun"></i>';
+        } else {
+          document.body.classList.remove('dark-mode');
+          const toggle = document.getElementById('themeToggle');
+          if (toggle) toggle.innerHTML = '<i class="bi bi-moon"></i>';
+        }
+      }
+    }
+
+    // Initialize
+    window.asli_config = {
+      url: '',
+      page: 'p/safelink.html',
+      output: '#output',
+      defaultkey: 'NihLink2024',
+      fixednavbar: true,
+      countdown: true,
+      timedown: 10,
+      analytics: true,
+      lang: {
+        urlempty: "URL mund të mos jetë e zbrazët",
+        convertsuccess: "Konvertimi i URL-it ishte i suksesshëm, kopjoni URL-in më poshtë",
+        validtext: "HTTP, HTTPS, ose WWW",
+        gourltext: "Kliko këtu për të shkuar",
+        nourl: "Nuk ka URL këtu",
+        errorconvert: "URL nuk mund të konvertohet",
+        emptypass: "Fjalekalimi nuk mund të jetë i zbrazët",
+        wrongpass: "Fjalekalimi është i pasaktë",
+        countdowntext: "Ju lutemi prisni {{anascountdown}} sekonda"
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      window.config = Object.assign({}, window.asli_config);
+      new SafelinkGenerator(window.config);
+      new ThemeManager();
+
+      // Handle decryption on single item page
+      if (document.body.classList.contains('single-item')) {
+        const decryptor = new SafelinkDecryptor(window.config);
+        const encryptedUrl = decryptor.getUrlParameter('u');
+        const outputContainer = document.querySelector(window.config.output);
+
+        if (encryptedUrl && outputContainer) {
+          const data = decryptor.decryptUrl(encryptedUrl, window.config.defaultkey);
+          if (data) {
+            if (!data.countdown) {
+              outputContainer.innerHTML = decryptor.renderLink(data);
+            } else {
+              decryptor.renderCountdown(data, outputContainer);
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
